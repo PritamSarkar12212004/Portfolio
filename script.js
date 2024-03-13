@@ -3,6 +3,7 @@
 //locomotive
 
 //gasp
+let side = gsap.timeline();
 let tin = gsap.timeline();
 tin.from(".page1-content>form>h1  ", {
   opacity: 0,
@@ -76,9 +77,70 @@ function page2anim() {
   // arrow rotate
   let arrow = document.querySelector(".arrow");
   setInterval(() => {
-      gsap.from(".arrow", {
-          rotate: 360,
-          duration: 1,
-        });
+    gsap.from(".arrow", {
+      rotate: 360,
+      duration: 1,
+    });
   }, 4000);
+}
+//home btn
+let page2 = document.querySelector(".page2");
+let homeBtn = document.querySelector("#home");
+homeBtn.addEventListener("click", () => {
+  page2.style.display = "flex";
+  let side = gsap.timeline();
+  gsap.to(".page2-content-main-RIGHT", {
+    x: 0,
+    duration: 1,
+  });
+  side.to(".page2-content-main-left", {
+    x: 0,
+    duration: 1,
+  });
+  gsap.to(".page2-content-side>p", {
+    duration: 0.5,
+    opacity: 1,
+  });
+  side.to(".page2-content-side>p>img", {
+    scale: 0,
+    stagger: 0.4,
+  });
+});
+// skills btn
+let page3 = document.querySelector(".page3");
+let skillBtn = document.querySelector("#skill");
+skillBtn.addEventListener("click", () => {
+  page3anim();
+});
+function page3anim() {
+  // page 2 exit anim
+  page2Exitanim();
+  page3Enteanim();
+}
+function page2Exitanim() {
+  let side = gsap.timeline();
+  gsap.to(".page2-content-main-RIGHT", {
+    x: "-200%",
+    duration: 1,
+  });
+  side.to(".page2-content-main-left", {
+    x: "200%",
+    duration: 1,
+  });
+  gsap.to(".page2-content-side>p", {
+    duration: 0.5,
+    opacity: 0,
+  });
+  side.to(".page2-content-side>p>img", {
+    scale: 0,
+    stagger: 0.4,
+  });
+  let ent = gsap.timeline();
+  ent.to(".page2", {
+    display: "none",
+  });
+  ent.to(".page3", {
+    display: "flex",
+  });
+ 
 }
